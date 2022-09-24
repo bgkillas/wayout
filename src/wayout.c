@@ -521,7 +521,7 @@ static void app_run (struct App *app)
 				printlog(app, 2, "Read line (size=%d)\n", line_size);
 				if (app->feed && strcmp(app->delimiter,"") == 0) {
 					if (app->text != NULL) free(app->text);
-					app->text = strdup(line);
+					app->text = "t";
 					app->require_update = true;
 				} else if (app->feed && strcmp(app->delimiter, line) == 0) {
 					flushbuffer = true;
