@@ -102,6 +102,8 @@ static void draw_background (cairo_t *cairo, struct Draw_dimensions *dimensions,
 static void draw_main (cairo_t *cairo, PangoLayout *layout, PangoFontDescription * font_description, struct Draw_dimensions *dimensions,
 		int32_t scale, struct App *app)
 {
+for(;;) {
+	sleep(1);
 	cairo_save(cairo);
 
 	cairo_set_source_rgba (
@@ -140,7 +142,7 @@ strftime(timeString, 9, "%H:%M:%S", time_info);
 	}
 	pango_cairo_show_layout(cairo, layout);
 	cairo_restore(cairo);
-
+}
 }
 
 static void clear_buffer (cairo_t *cairo)
