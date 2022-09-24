@@ -130,7 +130,7 @@ time_info = localtime(&current_time);
 strftime(timeString, 12, "%H:%M:%S", time_info);
 
 		pango_layout_set_markup(layout, timeString, -1);
-		}
+		
 		int width, height;
 		pango_layout_get_size(layout, &width, &height);
 
@@ -138,10 +138,11 @@ strftime(timeString, 12, "%H:%M:%S", time_info);
 			cairo_rel_move_to(cairo, - w / 2.0, - h / 2.0);
 		} else {
 			cairo_rel_move_to(cairo, - ((double)width / PANGO_SCALE) / 2, - ((double)height / PANGO_SCALE) / 2);
-		}
+		}}
 	}
 	pango_cairo_show_layout(cairo, layout);
 	cairo_restore(cairo);
+	
 }
 
 static void clear_buffer (cairo_t *cairo)
