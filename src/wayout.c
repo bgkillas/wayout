@@ -603,7 +603,7 @@ static void app_run (struct App *app)
 				if (app->require_update) {
 					printlog(app, 1, "Calling update.\n");
 					update(app);
-					app->require_update = false;
+					app->require_update = true;
 					first_update = false;
 				}
 			} else {
