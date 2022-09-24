@@ -522,9 +522,8 @@ static void app_run (struct App *app)
 					if (app->text != NULL) free(app->text);
 					app->text = strdup(line);
 					app->require_update = true;
-				} else if (app->feed && strcmp(app->delimiter, line) == 0) {
-					flushbuffer = true;
-				} else {
+				} 
+				 else {
 					if ((bufferhead - buffer) + strlen(line) >= BUFFERSIZE) {
 						printlog(app, 2, "Buffer size exceeded.. ignoring line\n");
 					} else {
@@ -532,11 +531,6 @@ static void app_run (struct App *app)
 						bufferhead += strlen(line);
 					}
 				}
-				if (feof(stdin)) flushbuffer = true; //not sure this can actually happen here
-			} else {
-				printlog(app, 2, "No line to get\n");
-				flushbuffer = true;
-			}
 
 		}
 
