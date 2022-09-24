@@ -512,7 +512,6 @@ static void app_run (struct App *app)
 
 		size_t line_size;
 		char *line = NULL;
-		bool flushbuffer = false;
 
 		if ( fds[stdin_fd].revents & POLLIN)
 		{
@@ -563,7 +562,6 @@ static void app_run (struct App *app)
 			read(fds[timer_fd].fd, &elapsed, sizeof(elapsed));
 		}
 
-		if (true) {
 			printlog(app, 2, "Flushing buffer (size %d)\n", bufferhead - buffer);
 			if (app->text != NULL) free(app->text);
 			*bufferhead = 0;
@@ -571,7 +569,7 @@ static void app_run (struct App *app)
 			bufferhead = (char*) &buffer;
 			*bufferhead = 0;
 			app->require_update = true;
-		}
+		
 
 #ifdef HANDLE_SIGNALS
 		/* Signal events. */
