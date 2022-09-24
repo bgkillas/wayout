@@ -510,7 +510,6 @@ static void app_run (struct App *app)
 			goto error;
 		}
 
-		size_t line_size;
 		char *line = NULL;
 		bool flushbuffer = false;
 
