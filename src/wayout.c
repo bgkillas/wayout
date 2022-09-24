@@ -426,10 +426,6 @@ static void app_run (struct App *app)
 	if (app->feed) {
 		struct itimerspec timer_value;
 		fds[timer_fd].events = POLLIN;
-		if ( 0 > (fds[timer_fd].fd = timerfd_create(CLOCK_MONOTONIC, 0))) {
-			printlog(NULL, 0, "ERROR: Unable to open timer fd.\n");
-			goto error;
-		}
 		memset(&timer_value, 0, sizeof(timer_value));
 		timer_value.it_value.tv_sec = timer_value.it_interval.tv_sec = floor((double) app->interval / 1000.0);
 		timer_value.it_value.tv_nsec = timer_value.it_interval.tv_nsec = floor(app->interval % 1000) * 1000000; //ms to ns
@@ -540,7 +536,6 @@ static void app_run (struct App *app)
 			}
 
 		}
-app->require_update = true;
 		if ((fds[stdin_fd].revents & POLLHUP))
 		{
 			//input pipe got closed, process all remaining input
