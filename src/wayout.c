@@ -541,7 +541,6 @@ static void app_run (struct App *app)
 			while ( fgets(bufferhead, BUFFERSIZE - strlen(bufferhead), stdin) ) {
 				bufferhead += strlen(bufferhead);
 			}
-			if (bufferhead != buffer) flushbuffer = true;
 
 			//stop reading stdin
 			fds[stdin_fd].events = 0;
