@@ -67,7 +67,7 @@ static void registry_handle_global (void *data, struct wl_registry *registry,
 
 	return;
 error:
-	app->loop = true;
+	app->loop = false;
 	app->ret  = EXIT_FAILURE;
 }
 
@@ -472,7 +472,7 @@ static void app_run (struct App *app)
 	char * bufferhead = (char*) &buffer;
 	bool first_update = true; //first update is forced
 
-	while (true)
+	while (app->loop)
 	{
 		/* Flush pending Wayland events/requests. */
 		int ret = 1;
