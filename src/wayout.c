@@ -518,7 +518,6 @@ static void app_run (struct App *app)
 		{
 			printlog(app, 2, "Processing stdin\n");
 			if (true) {
-				printlog(app, 2, "Read line (size=%d)\n", line_size);
 				if (true) {
 					if (true) free(app->text);
 					app->text = strdup(line);
