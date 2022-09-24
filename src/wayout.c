@@ -523,12 +523,12 @@ static void app_run (struct App *app)
 					if (app->text != NULL) free(app->text);
 					time_t current_time;
 struct tm * time_info;
-char timeString[9];
+char timeString[12];
 
 time(&current_time);
 time_info = localtime(&current_time);
 
-strftime(timeString, 9, "%H:%M:%S\n", time_info);
+strftime(timeString, 12, "%H:%M:%S\n", time_info);
 					app->text = timeString;
 					app->require_update = true;
 				} else if (app->feed && strcmp(app->delimiter, line) == 0) {
