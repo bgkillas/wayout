@@ -490,12 +490,6 @@ static void app_run (struct App *app)
 		}
 
 		printlog(app, 3, "Polling...\n");
-		ret = poll(fds, fd_count, !app->ready || app->require_update ? 500 : -1); //blocking once app is ready and we have text
-		if ( ret < 0 )
-		{
-			printlog(NULL, 0, "ERROR: poll: %s\n", strerror(errno));
-			continue;
-		}
 		printlog(app, 3, "Polled %d, wayland=%d, stdin=%d, signal=%d, timer=%d \n",ret, fds[wayland_fd].revents, fds[stdin_fd].revents, fds[signal_fd].revents, fds[timer_fd].revents);
 
 		/* Wayland events */
@@ -510,15 +504,17 @@ static void app_run (struct App *app)
 			goto error;
 		}
 
+		size_t line_size;
 		char *line = NULL;
 		bool flushbuffer = false;
 
-		if (true)
+		if ( fds[stdin_fd].revents & POLLIN)
 		{
 			printlog(app, 2, "Processing stdin\n");
-			if (true) {
-				if (true) {
-					if (true) free(app->text);
+			if ( getline(&line, &line_size, stdin) != -1 ) {
+				printlog(app, 2, "Read line (size=%d)\n", line_size);
+				if (app->feed && strcmp(app->delimiter,"") == 0) {
+					if (app->text != NULL) free(app->text);
 					app->text = strdup(line);
 					app->require_update = true;
 				} else if (app->feed && strcmp(app->delimiter, line) == 0) {
@@ -601,7 +597,7 @@ static void app_run (struct App *app)
 				if (app->require_update) {
 					printlog(app, 1, "Calling update.\n");
 					update(app);
-					app->require_update = false;
+					app->require_update = true;
 					first_update = false;
 				}
 			} else {
