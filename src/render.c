@@ -122,15 +122,14 @@ time_t current_time;
 struct tm * time_info;
 char timeString[9];
 
-while (true)
-{
+
 printf("%s\n","t");
 time(&current_time);
 time_info = localtime(&current_time);
 strftime(timeString, 9, "%H:%M:%S", time_info);
 pango_layout_set_markup(layout, timeString, -1);
+
 }
-	}
 		int width, height;
 		pango_layout_get_size(layout, &width, &height);
 
