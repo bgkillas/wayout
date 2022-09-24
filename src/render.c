@@ -173,15 +173,16 @@ void render_background_frame (struct Draw_surface *surface)
 		pango_layout_set_width (layout, app->dimensions.w * scale * PANGO_SCALE);
 		pango_layout_set_wrap (layout, PANGO_WRAP_WORD);
 	}
-	clear_buffer(cairo);
-
-	draw_background(cairo, &surface->dimensions, scale, app);
-	for(;;) {
+		for(;;) {
 	printf("%s\n","t");
 	sleep(1);
 
+
+	clear_buffer(cairo);
+
+	draw_background(cairo, &surface->dimensions, scale, app);
 	draw_main(cairo, layout, surface->font_description, &surface->dimensions,  scale, app);
-	}
+		}
 	wl_surface_set_buffer_scale(surface->background_surface, scale);
 	wl_surface_damage_buffer(surface->background_surface, 0, 0, INT32_MAX, INT32_MAX);
 	wl_surface_attach(surface->background_surface, surface->current_background_buffer->buffer, 0, 0);
