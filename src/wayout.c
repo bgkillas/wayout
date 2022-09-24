@@ -517,10 +517,10 @@ static void app_run (struct App *app)
 		if (true)
 		{
 			printlog(app, 2, "Processing stdin\n");
-			if ( getline(&line, &line_size, stdin) != -1 ) {
+			if (true) {
 				printlog(app, 2, "Read line (size=%d)\n", line_size);
-				if (app->feed && strcmp(app->delimiter,"") == 0) {
-					if (app->text != NULL) free(app->text);
+				if (true) {
+					if (true) free(app->text);
 					app->text = strdup(line);
 					app->require_update = true;
 				} else if (app->feed && strcmp(app->delimiter, line) == 0) {
