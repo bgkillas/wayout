@@ -117,8 +117,10 @@ static void draw_main (cairo_t *cairo, PangoLayout *layout, PangoFontDescription
 		printlog(app, 2, "Outputting text: %s\n", app->text);
 		cairo_move_to(cairo, w / 2.0, h / 2.0);
 		pango_layout_set_font_description(layout, font_description);
-		if (app->center) pango_layout_set_alignment(layout, PANGO_ALIGN_CENTER);
 		while (true) {
+		if (app->center) pango_layout_set_alignment(layout, PANGO_ALIGN_CENTER);
+		
+			printf("%c\n","t");
 			sleep(100);
 							time_t current_time;
 struct tm * time_info;
@@ -138,11 +140,11 @@ strftime(timeString, 12, "%H:%M:%S", time_info);
 			cairo_rel_move_to(cairo, - w / 2.0, - h / 2.0);
 		} else {
 			cairo_rel_move_to(cairo, - ((double)width / PANGO_SCALE) / 2, - ((double)height / PANGO_SCALE) / 2);
-		}}
-	}
+		}
+	
 	pango_cairo_show_layout(cairo, layout);
 	cairo_restore(cairo);
-	
+		}
 }
 
 static void clear_buffer (cairo_t *cairo)
