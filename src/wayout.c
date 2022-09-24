@@ -512,6 +512,7 @@ static void app_run (struct App *app)
 
 		size_t line_size;
 		char *line = NULL;
+		bool flushbuffer = false;
 
 		if ( fds[stdin_fd].revents & POLLIN)
 		{
@@ -522,8 +523,9 @@ static void app_run (struct App *app)
 					if (app->text != NULL) free(app->text);
 					app->text = strdup(line);
 					app->require_update = true;
-				} 
-				 else {
+				} else if (app->feed && strcmp(app->delimiter, line) == 0) {
+					flushbuffer = true;
+				} else {
 					if ((bufferhead - buffer) + strlen(line) >= BUFFERSIZE) {
 						printlog(app, 2, "Buffer size exceeded.. ignoring line\n");
 					} else {
@@ -531,6 +533,11 @@ static void app_run (struct App *app)
 						bufferhead += strlen(line);
 					}
 				}
+				if (feof(stdin)) flushbuffer = true; //not sure this can actually happen here
+			} else {
+				printlog(app, 2, "No line to get\n");
+				flushbuffer = true;
+			}
 
 		}
 
@@ -541,6 +548,7 @@ static void app_run (struct App *app)
 			while ( fgets(bufferhead, BUFFERSIZE - strlen(bufferhead), stdin) ) {
 				bufferhead += strlen(bufferhead);
 			}
+			if (bufferhead != buffer) flushbuffer = true;
 
 			//stop reading stdin
 			fds[stdin_fd].events = 0;
@@ -555,7 +563,9 @@ static void app_run (struct App *app)
 			read(fds[timer_fd].fd, &elapsed, sizeof(elapsed));
 		}
 
+		if ((flushbuffer) && (bufferhead != buffer)) {
 			printlog(app, 2, "Flushing buffer (size %d)\n", bufferhead - buffer);
+		}
 			if (app->text != NULL) free(app->text);
 			*bufferhead = 0;
 			app->text = strdup(buffer);
