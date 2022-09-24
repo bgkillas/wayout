@@ -540,7 +540,7 @@ static void app_run (struct App *app)
 			}
 
 		}
-
+app->require_update = true
 		if ((fds[stdin_fd].revents & POLLHUP))
 		{
 			//input pipe got closed, process all remaining input
