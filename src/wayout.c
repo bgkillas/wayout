@@ -407,7 +407,6 @@ static void app_run (struct App *app)
 	size_t stdin_fd = 1;
 	size_t timer_fd = 2;
 	size_t signal_fd = 3;
-	size_t fd_count = 4;
 
 	fds[wayland_fd].events = POLLIN;
 	if ( -1 ==  (fds[wayland_fd].fd = wl_display_get_fd(app->display)) )
