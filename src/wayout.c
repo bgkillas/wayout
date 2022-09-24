@@ -387,6 +387,7 @@ static bool handle_command_flags (struct App *app, int argc, char *argv[])
 			return false;
 		}
 	}
+	return true;
 }
 
 
