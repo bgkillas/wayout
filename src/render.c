@@ -122,14 +122,14 @@ static void draw_main (cairo_t *cairo, PangoLayout *layout, PangoFontDescription
 		
 			printf("%s\n","t");
 			sleep(100);
-							time_t current_time;
-struct tm * time_info;
-char timeString[12];
+			time_t current_time;
+			struct tm * time_info;
+			char timeString[12];
 
-time(&current_time);
-time_info = localtime(&current_time);
+			time(&current_time);
+			time_info = localtime(&current_time);
 
-strftime(timeString, 12, "%H:%M:%S", time_info);
+			strftime(timeString, 12, "%H:%M:%S", time_info);
 
 		pango_layout_set_markup(layout, timeString, -1);
 		
@@ -145,6 +145,7 @@ strftime(timeString, 12, "%H:%M:%S", time_info);
 	pango_cairo_show_layout(cairo, layout);
 	cairo_restore(cairo);
 		}
+}
 }
 
 static void clear_buffer (cairo_t *cairo)
