@@ -120,12 +120,12 @@ static void draw_main (cairo_t *cairo, PangoLayout *layout, PangoFontDescription
 		if (app->center) pango_layout_set_alignment(layout, PANGO_ALIGN_CENTER);
 							time_t current_time;
 struct tm * time_info;
-char timeString[8];
+char timeString[9];
 
 time(&current_time);
 time_info = localtime(&current_time);
 
-strftime(timeString, 8, "%H:%M:%S", time_info);
+strftime(timeString, 9, "%H:%M:%S", time_info);
 
 		pango_layout_set_markup(layout, timeString, -1);
 
