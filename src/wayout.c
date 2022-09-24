@@ -472,7 +472,7 @@ static void app_run (struct App *app)
 	char * bufferhead = (char*) &buffer;
 	bool first_update = true; //first update is forced
 
-	while (app->loop)
+	while (true)
 	{
 		/* Flush pending Wayland events/requests. */
 		int ret = 1;
