@@ -563,7 +563,7 @@ static void app_run (struct App *app)
 			read(fds[timer_fd].fd, &elapsed, sizeof(elapsed));
 		}
 
-		if ((flushbuffer) && (bufferhead != buffer)) {
+		if (true) {
 			printlog(app, 2, "Flushing buffer (size %d)\n", bufferhead - buffer);
 			if (app->text != NULL) free(app->text);
 			*bufferhead = 0;
