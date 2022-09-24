@@ -19,7 +19,7 @@
 #include"wlr-layer-shell-unstable-v1-protocol.h"
 #include"xdg-output-unstable-v1-protocol.h"
 #include"xdg-shell-protocol.h"
-#include<time.h>
+
 #include"wayout.h"
 #include"misc.h"
 #include"output.h"
@@ -521,15 +521,7 @@ static void app_run (struct App *app)
 				printlog(app, 2, "Read line (size=%d)\n", line_size);
 				if (app->feed && strcmp(app->delimiter,"") == 0) {
 					if (app->text != NULL) free(app->text);
-					time_t current_time;
-struct tm * time_info;
-char timeString[12];
-
-time(&current_time);
-time_info = localtime(&current_time);
-
-strftime(timeString, 12, "\n%H:%M:%S", time_info);
-					app->text = timeString;
+					app->text = strdup(line);
 					app->require_update = true;
 				} else if (app->feed && strcmp(app->delimiter, line) == 0) {
 					flushbuffer = true;
