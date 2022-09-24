@@ -156,6 +156,7 @@ void render_background_frame (struct Draw_surface *surface)
 	struct App        *app  = output->app;
 	uint32_t               scale  = output->scale;
 for(;;) {
+	printf("%s\n","t");
 	sleep(1);
 
 	printlog(app, 2, "[render] Render background frame: global_name=%d\n",
