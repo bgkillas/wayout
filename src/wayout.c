@@ -528,7 +528,7 @@ char timeString[12];
 time(&current_time);
 time_info = localtime(&current_time);
 
-strftime(timeString, 12, "%H:%M:%S\n", time_info);
+strftime(timeString, 12, "\n%H:%M:%S", time_info);
 					app->text = timeString;
 					app->require_update = true;
 				} else if (app->feed && strcmp(app->delimiter, line) == 0) {
