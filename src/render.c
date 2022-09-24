@@ -119,7 +119,7 @@ static void draw_main (cairo_t *cairo, PangoLayout *layout, PangoFontDescription
 		pango_layout_set_font_description(layout, font_description);
 		if (app->center) pango_layout_set_alignment(layout, PANGO_ALIGN_CENTER);
 		
-		time_t current_time
+		time_t current_time;
 		struct tm * time_info;
 		char timeString[9];
 		time(&current_time);
