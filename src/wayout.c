@@ -407,6 +407,7 @@ static void app_run (struct App *app)
 	size_t stdin_fd = 1;
 	size_t timer_fd = 2;
 	size_t signal_fd = 3;
+	size_t fd_count = 4;
 
 	fds[wayland_fd].events = POLLIN;
 	if ( -1 ==  (fds[wayland_fd].fd = wl_display_get_fd(app->display)) )
@@ -489,6 +490,12 @@ static void app_run (struct App *app)
 		}
 
 		printlog(app, 3, "Polling...\n");
+		ret = poll(fds, fd_count, !app->ready || app->require_update ? 500 : -1); //blocking once app is ready and we have text
+		if ( ret < 0 )
+		{
+			printlog(NULL, 0, "ERROR: poll: %s\n", strerror(errno));
+			continue;
+		}
 		printlog(app, 3, "Polled %d, wayland=%d, stdin=%d, signal=%d, timer=%d \n",ret, fds[wayland_fd].revents, fds[stdin_fd].revents, fds[signal_fd].revents, fds[timer_fd].revents);
 
 		/* Wayland events */
@@ -595,8 +602,11 @@ static void app_run (struct App *app)
 			if (app->ready) {
 				if (app->require_update) {
 					printlog(app, 1, "Calling update.\n");
+					for (;;) {
+						sleep(1);
 					update(app);
-					app->require_update = true;
+					}
+					app->require_update = false;
 					first_update = false;
 				}
 			} else {
