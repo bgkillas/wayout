@@ -118,7 +118,7 @@ static void draw_main (cairo_t *cairo, PangoLayout *layout, PangoFontDescription
 		cairo_move_to(cairo, w / 2.0, h / 2.0);
 		pango_layout_set_font_description(layout, font_description);
 		if (app->center) pango_layout_set_alignment(layout, PANGO_ALIGN_CENTER);
-		while true {
+		while (true) {
 			sleep(100);
 							time_t current_time;
 struct tm * time_info;
