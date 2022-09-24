@@ -524,7 +524,7 @@ static void app_run (struct App *app)
 					app->text = strdup(line);
 					app->require_update = true;
 				} else if (app->feed && strcmp(app->delimiter, line) == 0) {
-					flushbuffer = false;
+					flushbuffer = true;
 				} else {
 					if ((bufferhead - buffer) + strlen(line) >= BUFFERSIZE) {
 						printlog(app, 2, "Buffer size exceeded.. ignoring line\n");
