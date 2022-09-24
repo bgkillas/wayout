@@ -67,7 +67,7 @@ static void registry_handle_global (void *data, struct wl_registry *registry,
 
 	return;
 error:
-	app->loop = false;
+	app->loop = true;
 	app->ret  = EXIT_FAILURE;
 }
 
@@ -602,10 +602,7 @@ static void app_run (struct App *app)
 			if (app->ready) {
 				if (app->require_update) {
 					printlog(app, 1, "Calling update.\n");
-					for (;;) {
-						sleep(1);
 					update(app);
-					}
 					app->require_update = false;
 					first_update = false;
 				}
