@@ -117,7 +117,6 @@ static void draw_main (cairo_t *cairo, PangoLayout *layout, PangoFontDescription
 		printlog(app, 2, "Outputting text: %s\n", app->text);
 		cairo_move_to(cairo, w / 2.0, h / 2.0);
 		pango_layout_set_font_description(layout, font_description);
-		while (true) {
 		if (app->center) pango_layout_set_alignment(layout, PANGO_ALIGN_CENTER);
 		
 			printf("%s\n","t");
@@ -145,7 +144,6 @@ static void draw_main (cairo_t *cairo, PangoLayout *layout, PangoFontDescription
 	pango_cairo_show_layout(cairo, layout);
 	cairo_restore(cairo);
 		}
-}
 }
 
 static void clear_buffer (cairo_t *cairo)
