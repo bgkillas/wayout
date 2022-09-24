@@ -168,9 +168,6 @@ void destroy_surface (struct Draw_surface *surface)
 
 void update (struct App *app)
 {
-	for (;;)
-	{
-		sleep(1);
 	printlog(app, 1, "[surface] Updating\n");
 	struct Draw_output *op, *tmp;
 	wl_list_for_each_safe(op, tmp, &app->outputs, link)
@@ -179,6 +176,5 @@ void update (struct App *app)
 			render_background_frame(op->surface);
 			wl_surface_commit(op->surface->background_surface);
 		}
-	}
 }
 

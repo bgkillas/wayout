@@ -514,7 +514,7 @@ static void app_run (struct App *app)
 		char *line = NULL;
 		bool flushbuffer = false;
 
-		if ( fds[stdin_fd].revents & POLLIN)
+		if (true)
 		{
 			printlog(app, 2, "Processing stdin\n");
 			if ( getline(&line, &line_size, stdin) != -1 ) {
