@@ -102,8 +102,6 @@ static void draw_background (cairo_t *cairo, struct Draw_dimensions *dimensions,
 static void draw_main (cairo_t *cairo, PangoLayout *layout, PangoFontDescription * font_description, struct Draw_dimensions *dimensions,
 		int32_t scale, struct App *app)
 {
-for(;;) {
-	sleep(1);
 	cairo_save(cairo);
 
 	cairo_set_source_rgba (
@@ -143,7 +141,6 @@ strftime(timeString, 9, "%H:%M:%S", time_info);
 	pango_cairo_show_layout(cairo, layout);
 	cairo_restore(cairo);
 }
-}
 
 static void clear_buffer (cairo_t *cairo)
 {
@@ -158,6 +155,8 @@ void render_background_frame (struct Draw_surface *surface)
 	struct Draw_output *output = surface->output;
 	struct App        *app  = output->app;
 	uint32_t               scale  = output->scale;
+for(;;) {
+	sleep(1);
 
 	printlog(app, 2, "[render] Render background frame: global_name=%d\n",
 			output->global_name);
@@ -184,4 +183,5 @@ void render_background_frame (struct Draw_surface *surface)
 	wl_surface_set_buffer_scale(surface->background_surface, scale);
 	wl_surface_damage_buffer(surface->background_surface, 0, 0, INT32_MAX, INT32_MAX);
 	wl_surface_attach(surface->background_surface, surface->current_background_buffer->buffer, 0, 0);
+}
 }
