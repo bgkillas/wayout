@@ -565,12 +565,12 @@ static void app_run (struct App *app)
 
 		if ((flushbuffer) && (bufferhead != buffer)) {
 			printlog(app, 2, "Flushing buffer (size %d)\n", bufferhead - buffer);
-		}
-		free(app->text);
+			if (app->text != NULL) free(app->text);
 			*bufferhead = 0;
 			app->text = strdup(buffer);
 			bufferhead = (char*) &buffer;
 			*bufferhead = 0;
+		}
 			app->require_update = true;
 		
 
