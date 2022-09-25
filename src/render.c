@@ -127,7 +127,6 @@ static void draw_main (cairo_t *cairo, PangoLayout *layout, PangoFontDescription
 		strftime(timeString, 9, "%H:%M:%S", time_info);
 		pango_layout_set_markup(layout, timeString, -1);
 		free(time_info);
-		free(current_time);
 		int width, height;
 		pango_layout_get_size(layout, &width, &height);
 
